@@ -20,17 +20,13 @@ constraint forall(i in 1..n_rounds, j in 1..n_groups)(count_eq(groups[i,1..n_gol
 % Chaque golfer ne peut être avec un autre golfer dans le même groupe qu'une unique fois (au plus)
 constraint forall(i in 1..n_golfers, j in 1..n_golfers)(sum(k in 1..n_rounds where i != j)(bool2int(groups[k,i] == groups[k,j])) <= 1);
 
-% Fixer le premier golfer toujours au même groupe (1)
-%constraint forall(i in 1..n_rounds)(groups[i,1] = 1);
-%constraint forall(j in 2..n_golfers)(at_most(1,groups[1..n_rounds,j],1));
-
  constraint
-  % Symetry breaking by group assignement
-  % The first golfer always plays in group 1
-  % On the first round, the first n_per_group golfers play in group 1, the 
-  % second groupSize golfers play in group 2, etc. 
-  % On the second round golfer 2 play in group 2, golfer 3 in group 3, etc etc
-  % till golfer number n_per_group
+  % Cassage de symétrie par assignement de variable
+  % Le premier golfer joue toujours dans le 1er groupe
+  % Au premier round, les n_per_group premier golfers jouent dans le groupe 1,
+  % les n_per_group suivant dans le 2eme etc etc.
+  % Au second round le golfer 2 joue dans le groupe 2, le golfer 3 dans le groupe
+  % 3, et ainsi de suite jusqu'au golfer n_per_group
   forall(r in 1..n_rounds)(
     groups[r,1] = 1
   )
