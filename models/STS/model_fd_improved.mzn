@@ -1,3 +1,5 @@
+include "globals.mzn";
+
 int: n_teams;
 int: n_weeks = n_teams - 1;
 int: n_periods = n_teams div 2;
@@ -12,10 +14,10 @@ array[1..n_weeks, 1..n_teams] of var 1..n_periods: periods;
 % Chaque équipe joue une fois par semaine (Contrainte induite par les variables.)
 
 % Chaque période ne regroupe que deux équipes
-constraint forall(i in 1..n_weeks, k in 1..n_periods)(sum(j in 1..n_teams)(bool2int(periods[i,j] == k)) == 2);
+constraint forall(i in 1..n_weeks, k in 1..n_periods)(count_eq(periods[i,1..n_teams],k,2));
 
 % Chaque équipe joue au plus 2 fois dans la même période
-constraint forall(j in 1..n_teams, k in 1..n_periods)(sum(i in 1..n_weeks)(bool2int(periods[i,j] == k)) <= 2);
+constraint forall(j in 1..n_teams, k in 1..n_periods)(count(periods[1..n_weeks,j],k)<= 2);
 
 % Chaque équipe affronte toute les autres
 constraint forall(i,j in 1..n_teams)(sum(k in 1..n_weeks)(bool2int(periods[k,i] == periods[k,j])) >= 1);
