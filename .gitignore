@@ -1,5 +1,6 @@
 lectures/*
 .DS_Store
-.ozn
-.fzn
-.txt
+*.ozn
+*.fzn
+*.txt
+*.pdf
