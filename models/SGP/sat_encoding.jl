@@ -95,11 +95,9 @@ function sat_modeling()
         for w_var in 1:w, g_var in 1:g
             for w_second in w_var+1:w, g_second in 1:g, player in 1:q, p1_var in 1:p, p1_second in 1:p
                 for player_second in player+1:q, p2_var in 1:p, p2_second in 1:p
-                    if g_var != g_second
                         clause = string( not(var_to_int(player, p1_var, g_var, w_var)), " ",not(var_to_int(player_second, p2_var, g_var, w_var)), " ",not(var_to_int(player, p1_second, g_second, w_second)), " ",not(var_to_int(player_second, p2_second, g_second, w_second)), " 0\n" )
                         write(f,clause)
                         nb_clause += 1
-                    end
                 end
             end
         end
