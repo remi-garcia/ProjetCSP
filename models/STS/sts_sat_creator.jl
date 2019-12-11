@@ -26,7 +26,7 @@ function create()
     file = open("sts.cnf", "w")         # Open file in writting mode
     write(file, "c SAT version for STS problem\n")  # Comments
     write(file, "c Authors : Killian Fretaud, Rémi Garcia, Benoit Loger, Boualem Lamraoui, Benoît Le Badezet\n")  #Comments
-    write(file, "p cnf ", string(nb_var + nb_combi), " ", string(nb_clauses), "\n") # Spécifications du problème
+    write(file, "p cnf ", string(nb_var + nb_combi -1), " ", string(nb_clauses), "\n") # Spécifications du problème
 
     #Constraint 1 : Each teams plays only once per weeks
     for t in 1:nb_teams
