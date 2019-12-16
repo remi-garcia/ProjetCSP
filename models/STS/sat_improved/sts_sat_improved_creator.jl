@@ -1,7 +1,7 @@
 #=
         Constants for the problem, just change nb_teams, the others depend on it
 =#
-const nb_teams = 6
+const nb_teams = 10
 const nb_weeks = nb_teams - 1
 const nb_periods = div(nb_teams, 2)
 
@@ -96,7 +96,11 @@ function create()
             write(file, s, "0\n")
         end
     end
-
+    #Symetry breaker, we force the first week of matchs : 1v2 , 3v4 , ... , nb_teams-1 v nb_teams
+    for p in 1:nb_periods
+        write(file, string(variables[2*p-1,1,p]), " 0\n")
+        write(file, string(variables[2*p,1,p]), " 0\n")
+    end
 
     close(file)
 end

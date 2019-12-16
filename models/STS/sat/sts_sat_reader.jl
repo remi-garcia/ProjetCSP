@@ -1,7 +1,7 @@
 #=
         Constants for the problem, just change nb_teams, the others depend on it
 =#
-const nb_teams = 6
+const nb_teams = 10
 const nb_weeks = nb_teams - 1
 const nb_periods = div(nb_teams, 2)
 
