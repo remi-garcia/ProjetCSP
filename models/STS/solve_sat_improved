@@ -1,0 +1,8 @@
+#!/bin/bash
+# Create sat models, solve it and read results
+
+julia sat_improved/sts_sat_improved_creator.jl
+minisat sts.cnf res.res
+julia sat_improved/sts_sat_improved_reader.jl
+rm sts.cnf
+rm res.res
