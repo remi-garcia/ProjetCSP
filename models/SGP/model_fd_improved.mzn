@@ -16,7 +16,7 @@ array[1..n_rounds, 1..n_golfers] of var 1..n_groups: groups;
 % Chaque groupe a exactement `n_per_group` golfeurs
 constraint forall(i in 1..n_rounds, j in 1..n_groups)(count_eq(groups[i,1..n_golfers],j,n_per_group));
 
-% Chaque golfer ne peut être avec un autre golfer dans le même groupe qu'une unique fois (au plus)
+% Chaque golfeur ne peut être avec un autre golfeur dans le même groupe qu'une unique fois (au plus)
 constraint forall(i in 1..n_golfers, j in 1..n_golfers where i != j)(sum(k in 1..n_rounds)(bool2int(groups[k,i] == groups[k,j])) <= 1);
 
 % Cassage de symétrie par assignement de variable
