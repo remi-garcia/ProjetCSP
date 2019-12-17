@@ -12,6 +12,7 @@ nb_clauses = ((nb_teams * nb_weeks) + (nb_teams * nb_weeks * sum(1:nb_periods-1)
 nb_clauses = nb_clauses + (nb_periods*nb_weeks*nb_teams) + (nb_periods*nb_weeks* binomial(nb_teams, 3))
 nb_clauses = nb_clauses + (nb_teams * nb_periods) + (nb_teams * nb_periods * binomial(nb_weeks, 3))
 nb_clauses = nb_clauses + binomial(nb_teams, 2) + (binomial(nb_teams, 2) * nb_weeks * nb_periods * 3)
+nb_clauses = nb_clauses + nb_teams
 
 # For better readability, we will use a tables constaining the variables
 variables = reshape(1:nb_var, nb_teams, nb_weeks, nb_periods)
