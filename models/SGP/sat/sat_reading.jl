@@ -56,4 +56,4 @@ function int_to_var(value::Int)
     return w_var, g_var, p_var, q_var
 end
 
-read_sat_results("/home/benoit/Bureau/test.out")
+read_sat_results("res.res")

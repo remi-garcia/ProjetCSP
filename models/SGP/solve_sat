@@ -1,0 +1,8 @@
+#!/bin/bash
+# Create sat models, solve it and read results
+
+julia sat/sat_encoding.jl
+minisat sgp.cnf res.res
+julia sat/sat_reading.jl
+rm sgp.cnf
+rm res.res

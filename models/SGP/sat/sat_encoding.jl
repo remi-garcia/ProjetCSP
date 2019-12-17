@@ -36,14 +36,14 @@ Example : (x1 v NOT(x5) v x4 v x1) AND (NOT(x1) v x5 v x3 v x4)
     1 -5 4 0
     -1 5 3 4 0
 """
-function sat_modeling(file_name::String)
+function sat_modeling()
     q = g * p # q denote the total number of players
     println(" Encoding Model ", w ," weeks ", g, " groups ", p, " players per groups " )
     println(" Total number of player : ", q)
     println(" Total number of variable : ", q*p*g*w)
     nb_clause = 0
     # Writting in the file
-    open(file_name,"w") do f
+    open("sgp.cnf","w") do f
 
         # Each golfer plays once a week
         for q_var in 1:q, w_var in 1:w
@@ -112,4 +112,5 @@ function var_to_int(q_var::Int, p_var::Int, g_var::Int, w_var::Int)
     q = g * p
     return q_var + (p_var-1)*(q) +  (g_var-1)*(q)*(p) + (w_var-1)*(q)*(p)*(g)
 end
- sat_modeling("/home/benoit/Bureau/test.in")
+
+sat_modeling()
