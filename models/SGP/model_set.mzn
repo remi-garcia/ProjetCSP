@@ -14,7 +14,7 @@ constraint forall(i in 1..n_rounds)(forall(j, k in 1..n_groups where j < k)(grou
 % Chaque groupe a exactement `n_per_group` golfers
 constraint forall(i in 1..n_rounds, j in 1..n_groups)(card(groups[i,j]) = n_per_group);
 % Chaque golfer ne peut être avec un autre golfer dans le même groupe qu'une unique fois (au plus)
-constraint forall(i, j in 1..n_rounds where i < j)(forall(k, l in 1..n_groups)(card(groups[i, k] intersect groups[j, l]) <= 1));
+constraint forall(i, j in 1..n_rounds where i != j)(forall(k, l in 1..n_groups)(card(groups[i, k] intersect groups[j, l]) <= 1));
 
 solve satisfy;
 
