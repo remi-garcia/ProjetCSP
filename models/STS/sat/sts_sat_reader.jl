@@ -27,11 +27,11 @@ function read_results(file_name::String)
     end
     tables = reshape(results, nb_teams, nb_weeks, nb_periods)
     for w in 1:nb_weeks
-        println("WEEK n°: ", w)
+        println("WEEK n°", w)
         for t in 1:nb_teams
             for p in 1:nb_periods
                 if tables[t,w,p] == variables[t,w,p]
-                    println("Team n°", t, " play during period :", p)
+                    println("Team n°", t, " play during period : ", p)
                 end
             end
         end
