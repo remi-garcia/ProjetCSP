@@ -20,7 +20,7 @@ constraint forall(i in 1..n_weeks, k in 1..n_periods)(count_eq(periods[i,1..n_te
 constraint forall(j in 1..n_teams, k in 1..n_periods)(count(periods[1..n_weeks,j],k)<= 2);
 
 % Chaque équipe affronte toute les autres
-constraint forall(i,j in 1..n_teams)(sum(k in 1..n_weeks)(bool2int(periods[k,i] == periods[k,j])) >= 1);
+constraint forall(i in 1..n_teams-1, j in i..n_teams)(sum(k in 1..n_weeks)(bool2int(periods[k,i] == periods[k,j])) >= 1);
 
 
 % --- Cassage de Symétries --- %
