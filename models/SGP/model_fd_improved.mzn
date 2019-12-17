@@ -4,7 +4,6 @@ int: n_rounds;
 
 int: n_golfers = n_groups * n_per_group;
 
-include "at_most.mzn";
 include "count_eq.mzn";
 
 % --- Variables --- %
@@ -44,4 +43,4 @@ solve satisfy;
 
  output [
     "Round \(i) : " ++ show(groups[i,1..n_golfers]) ++ " \n" | i in 1..n_rounds
-]; 
+];
