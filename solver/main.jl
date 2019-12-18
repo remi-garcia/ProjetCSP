@@ -8,7 +8,7 @@ include("variable.jl")
 include("model.jl")
 include("constraint.jl")
 
-const U = [1,2]
+const U = [1,2,3,4,5,6,7,8,9]
 
 """
     Attention ce solver n'est absolument pas exent de bug ou de code à la con,

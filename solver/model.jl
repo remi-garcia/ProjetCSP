@@ -66,10 +66,12 @@ function solve!(m::Model)
         found, current_node = enumeration(enumeration_list, found)
     end
     if found
-        println(current_node.solution)
+        return current_node.solution
     else
         println("No solution found")
+        return nothing
     end
+
 end
 
 function enumeration(enumeration_list::Vector{Node}, found::Bool)
@@ -92,7 +94,6 @@ function enumeration(enumeration_list::Vector{Node}, found::Bool)
         else
             println("Solution found")
             found = true
-            println(node.model)
             enumeration_list = []
             set_solution(node)
         end

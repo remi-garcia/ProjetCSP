@@ -15,7 +15,7 @@ function all_diff_filtering(m::Model, variables::Vector{String})
         var1 = m.variables[variables[i]]
         for j in i+1:length(variables)
             var2 = m.variables[variables[j]]
-            
+
             setdiff!(var1.max, var2.min)
             var1.max_card = min(var1.max_card, length(setdiff( var1.universe, var2.min )) )
 
@@ -125,4 +125,30 @@ function Base.show(io::IO, constraint::include_in)
     show(io, constraint.var_index[1])
     print(io, " include in ")
     show(io, constraint.var_index[2])
+end
+
+function intersect_eq_filtering(m::Model,variables::Array{String,1})
+    F = m.variables[variable[1]]
+    G = m.variables[variable[2]]
+    E = m.variables[variable[3]]
+
+    E.min = Base.union(E.min,(Base.intersect(F.min,G.min)))
+    setdiff!(E.max,F.max)
+    setdiff!(E.max,F.max)
+
+    F.min = Base.union(F.min,E.min)
+    setdiff!(F.max,setdiff(G.min,E.max))
+
+    G.min = Base.union(G.min,G.min)
+    setdiff!(G.max,setdiff(F.min,E.max))
+end
+
+struct intersect_eq <: Constraint
+    var_index::Vector{String}
+    filtering_function::Function
+
+    empty_intersection(variables::Vector{String}) = new(
+        variables,
+        intersect_eq_filtering
+    )
 end

@@ -10,11 +10,12 @@ function fix!(variable::Variable, new_fixed_value::Set{Int})
     else
         if length(new_fixed_value) > variable.max_card
             error("Failed to fix variable ", variable.id_var, " the card of the new value is too big")
-        elseif length(new_fixed_value) < min_card
+        elseif length(new_fixed_value) < variable.min_card
             error("Failed to fix variable ", variable.id_var, " the card of the new value is too small")
         else
             variable.is_fixed = true
-            variable.fixed_value = new_fixed_value
+            variable.min = new_fixed_value
+            variable.max = new_fixed_value
         end
     end
 end
