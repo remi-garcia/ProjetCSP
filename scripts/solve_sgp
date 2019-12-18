@@ -1,0 +1,37 @@
+#!/bin/bash
+parent_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P)
+cd "$parent_path"
+FILES=../data/SGP/*
+model=../models/SGP/model_set.mzn
+for f in $FILES
+do
+datanameext=$(basename "$f")
+dataname="${datanameext%.*}"
+minizinc --solver Gecode -O1 --random-seed 0 --time-limit 60000 --output-time --output-to-file set_sgp_gecode_O1_$dataname.txt $model $f
+minizinc --solver Chuffed -O1 --random-seed 0 --time-limit 60000 --output-time --output-to-file set_sgp_chuffed_O1_$dataname.txt $model $f
+done
+model=../models/SGP/model_set_improved.mzn
+for f in $FILES
+do
+datanameext=$(basename "$f")
+dataname="${datanameext%.*}"
+minizinc --solver Gecode -O1 --random-seed 0 --time-limit 60000 --output-time --output-to-file set_improved_sgp_gecode_O1_$dataname.txt $model $f
+minizinc --solver Chuffed -O1 --random-seed 0 --time-limit 60000 --output-time --output-to-file set_improved_sgp_chuffed_O1_$dataname.txt $model $f
+done
+
+model=../models/SGP/model_fd.mzn
+for f in $FILES
+do
+datanameext=$(basename "$f")
+dataname="${datanameext%.*}"
+minizinc --solver Gecode -O1 --random-seed 0 --time-limit 60000 --output-time --output-to-file fd_sgp_gecode_O1_$dataname.txt $model $f
+minizinc --solver Chuffed -O1 --random-seed 0 --time-limit 60000 --output-time --output-to-file fd_sgp_chuffed_O1_$dataname.txt $model $f
+done
+model=../models/SGP/model_fd_improved.mzn
+for f in $FILES
+do
+datanameext=$(basename "$f")
+dataname="${datanameext%.*}"
+minizinc --solver Gecode -O1 --random-seed 0 --time-limit 60000 --output-time --output-to-file fd_improved_sgp_gecode_O1_$dataname.txt $model $f
+minizinc --solver Chuffed -O1 --random-seed 0 --time-limit 60000 --output-time --output-to-file fd_improved_sgp_chuffed_O1_$dataname.txt $model $f
+done
