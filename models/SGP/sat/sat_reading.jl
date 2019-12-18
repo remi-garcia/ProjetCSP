@@ -7,7 +7,7 @@
 #         Boualem Lamraoui, Benoît Le Badezet, Benoit Loger
 #-------------------------------------------------------------------------------
 
-const p, g, w = 4,4,4
+const g, p, w = 2,2,3
 
 """
     read_sat_results(file_name)

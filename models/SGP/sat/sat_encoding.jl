@@ -14,8 +14,7 @@
 # player q' is the p'-th player of the group number g' of week w' or not
 
 #-------------------------------------------------------------------------------
-const p, g, w = 4,4,4
-
+const g, p, w = 2,2,3
 
 """
     sat_modeling(p::Int, g::Int, w::Int)
@@ -38,7 +37,7 @@ Example : (x1 v NOT(x5) v x4 v x1) AND (NOT(x1) v x5 v x3 v x4)
 """
 function sat_modeling()
     q = g * p # q denote the total number of players
-    println(" Encoding Model ", w ," weeks ", g, " groups ", p, " players per groups " )
+    println(" Encoding Model ", w ," weeks ", g, " groups ", p, " players per groups ")
     println(" Total number of player : ", q)
     println(" Total number of variable : ", q*p*g*w)
     nb_clause = 0
@@ -49,7 +48,7 @@ function sat_modeling()
         for q_var in 1:q, w_var in 1:w
             clause = ""
             for p_var in 1:p, g_var in 1:g
-                clause = clause*string( var_to_int(q_var, p_var, g_var, w_var)," " )
+                clause = clause*string( var_to_int(q_var, p_var, g_var, w_var)," ")
             end
             clause = clause*"0\n"
             write(f,clause)
@@ -66,7 +65,7 @@ function sat_modeling()
 
         for q_var in 1:q, w_var in 1:w, p_var in 1:p, g_var in 1:g
             for g_second in g_var+1:g, p_second in p_var+1:p
-                clause = string( not(var_to_int(q_var, p_var, g_var, w_var))," ",not(var_to_int(q_var, p_second, g_second, w_var))," 0\n")
+                clause = string(not(var_to_int(q_var, p_var, g_var, w_var))," ",not(var_to_int(q_var, p_second, g_second, w_var))," 0\n")
                 write(f,clause)
                 nb_clause += 1
             end
@@ -76,7 +75,7 @@ function sat_modeling()
         for w_var in 1:w, p_var in 1:p, g_var in 1:g
             clause = ""
             for player in 1:q
-                clause = clause*string(var_to_int(player, p_var, g_var, w_var)," " )
+                clause = clause*string(var_to_int(player, p_var, g_var, w_var)," ")
             end
             clause = clause*"0\n"
             write(f,clause)
@@ -85,7 +84,7 @@ function sat_modeling()
 
         for w_var in 1:w, p_var in 1:p, g_var in 1:g, player in 1:q
             for player_second in player+1:q
-                clause = string( not(var_to_int(player, p_var, g_var, w_var))," ",not(var_to_int(player_second, p_var, g_var, w_var))," 0\n")
+                clause = string(not(var_to_int(player, p_var, g_var, w_var))," ",not(var_to_int(player_second, p_var, g_var, w_var))," 0\n")
                 write(f,clause)
                 nb_clause += 1
             end
@@ -95,9 +94,9 @@ function sat_modeling()
         for w_var in 1:w, g_var in 1:g
             for w_second in w_var+1:w, g_second in 1:g, player in 1:q, p1_var in 1:p, p1_second in 1:p
                 for player_second in player+1:q, p2_var in 1:p, p2_second in 1:p
-                        clause = string( not(var_to_int(player, p1_var, g_var, w_var)), " ",not(var_to_int(player_second, p2_var, g_var, w_var)), " ",not(var_to_int(player, p1_second, g_second, w_second)), " ",not(var_to_int(player_second, p2_second, g_second, w_second)), " 0\n" )
-                        write(f,clause)
-                        nb_clause += 1
+                    clause = string(not(var_to_int(player, p1_var, g_var, w_var)), " ",not(var_to_int(player_second, p2_var, g_var, w_var)), " ",not(var_to_int(player, p1_second, g_second, w_second)), " ",not(var_to_int(player_second, p2_second, g_second, w_second)), " 0\n")
+                    write(f,clause)
+                    nb_clause += 1
                 end
             end
         end

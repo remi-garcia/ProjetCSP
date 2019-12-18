@@ -3,7 +3,7 @@
 parent_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P)
 
 julia $parent_path/sat/sat_encoding.jl
-minisat -no-pre sgp.cnf res.res
+minisat -cpu-lim=60 -no-pre sgp.cnf res.res
 julia $parent_path/sat/sat_reading.jl
 rm sgp.cnf
 rm res.res
