@@ -1,8 +1,9 @@
 #!/bin/bash
 # Create sat models, solve it and read results
+parent_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P)
 
-julia sat/sat_encoding.jl
-minisat sgp.cnf res.res
-julia sat/sat_reading.jl
+julia $parent_path/sat/sat_encoding.jl
+minisat -no-pre sgp.cnf res.res
+julia $parent_path/sat/sat_reading.jl
 rm sgp.cnf
 rm res.res
