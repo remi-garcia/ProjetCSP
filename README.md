@@ -1,5 +1,7 @@
 # ProjetCSP
 
+**Ce projet a été arrêté.**
+
 ### Infos utiles
 Problèmes traités :
 - The Social Golfer Problem (SGP) : http://csplib.org/Problems/prob010/
